@@ -9,6 +9,7 @@ use App\Http\Requests\TodoRequest;
 
 class TodoController extends Controller
 {
+    //一覧表示
     public function index()
     {
         $todos = Todo::all();
@@ -16,6 +17,7 @@ class TodoController extends Controller
         return view('index', compact('todos'));
     }
 
+    //新規作成
     public function store(TodoRequest $request)
     {
         $todo = $request->only(['content']);
@@ -24,6 +26,7 @@ class TodoController extends Controller
         return redirect('/')->with('message', 'Todoを作成しました');
     }
 
+    //更新処理
     public function update(TodoRequest $request)
     {
         $todo = $request->only(['content']);
@@ -32,6 +35,7 @@ class TodoController extends Controller
         return redirect('/')->with('message', 'Todoを更新しました');
     }
 
+    //削除処理
     public function destroy(Request $request)
     {
         Todo::find($request->id)->delete();

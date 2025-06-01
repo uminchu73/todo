@@ -2,9 +2,12 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{{-- index.cssを読み込む --}}
+
 @endsection
 
 @section('content')
+{{-- 上部アラート --}}
 <div class="todo__alert">
     @if (session('message'))
         <div class="todo__alert--success">
@@ -23,22 +26,27 @@
 </div>
 
 <div class="todo__content">
+    {{-- 入力欄 --}}
     <form class="create-form" action="{{ url('/todos') }}" method="post">
         @csrf
         <div class="create-form__item">
             <input class="create-form__item-input" type="text" name="content">
         </div>
+        {{-- 作成ボタン --}}
         <div class="create-form__button">
             <button class="create-form__button-submit" type="submit">作成</button>
         </div>
     </form>
+    {{-- Todoリストタイトル --}}
     <div class="todo-table">
         <table class="todo-table__inner">
             <tr class="todo-table__row">
                 <th class="todo-table__header">Todo</th>
             </tr>
+            {{-- 一覧表示 --}}
             @foreach ($todos as $todo)
             <tr class="todo-table__row">
+                {{-- 更新処理 --}}
                 <td class="todo-table__item">
                     <form class="update-form" action="/todos/update" method="POST">
                         @method('PATCH')
@@ -52,6 +60,7 @@
                         </div>
                     </form>
                 </td>
+                {{-- 削除処理 --}}
                 <td class="todo-table__item">
                     <form class="delete-form" action="/todos/delete" method="POST">
                         @method('DELETE')

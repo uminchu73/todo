@@ -21,12 +21,16 @@ class TodoRequest extends FormRequest
      *
      * @return array
      */
+
+    //バリデーション
     public function rules()
     {
         return [
             'content' => ['required', 'string', 'max:20'],
         ];
     }
+
+    //エラーメッセージ
     public function messages()
     {
         return [
